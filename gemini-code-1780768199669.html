@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioLab Plantas: El Motor Verde de la Tierra</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --verde-profundo: #1b4332;
+            --verde-esmeralda: #2d6a4f;
+            --verde-lima: #52b788;
+            --cian-energia: #40e0d0;
+            --amarillo-solar: #ffd60a;
+            --blanco-brillante: #f7f9f6;
+            --gris-laboratorio: #e8e8e8;
+            --tierra: #8b6f47;
+            --texto-principal: #0d1b2a;
+            --sombra-suave: rgba(27, 67, 50, 0.15);
+            --rojo-youtube: #ff0000;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7f9f6 0%, #e8f5e9 50%, #f1f8e9 100%);
+            color: var(--texto-principal);
+            overflow-x: hidden;
+        }
+
+        /* Fondo animado con partículas flotantes */
+        .fondo-animado {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particula {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.6), rgba(64, 224, 208, 0));
+            border-radius: 50%;
+            animation: flotar linear infinite;
+        }
+
+        @keyframes flotar {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Contenedor principal */
+        .contenedor {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Secciones */
+        section {
+            margin: 40px 0;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== PORTADA PRINCIPAL ==================== */
+        .portada {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, rgba(45, 106, 79, 0.1), rgba(64, 224, 208, 0.05));
+            border-radius: 20px;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+            backdrop-filter: blur(10px);
+            margin-bottom: 50px;
+        }
+
+        .portada h1 {
+            font-size: 3.5rem;
+            color: var(--verde-profundo);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .portada .subtitulo {
+            font-size: 1.5rem;
+            color: var(--verde-esmeralda);
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .portada .descripcion {
+            font-size: 1.1rem;
+            color: var(--texto-principal);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .boton-principal {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--verde-esmeralda), var(--verde-lima));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(45, 106, 79, 0.3);
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .boton-principal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(45, 106, 79, 0.4);
+        }
+
+        /* Botón específico para YouTube */
+        .boton-youtube {
+            background: linear-gradient(135deg, var(--rojo-youtube), #cc0000);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.25);
+        }
+
+        .boton-youtube:hover {
+            box-shadow: 0 12px 35px rgba(255, 0, 0, 0.4);
+            background: linear-gradient(135deg, #cc0000, #b30000);
+        }
+
+        /* Tarjetas de datos rápidos */
+        .tarjetas-rapidas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .tarjeta-rapida {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--verde-lima);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .tarjeta-rapida:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(82, 183, 136, 0.3);
+            border-color: var(--cian-energia);
+        }
+
+        .tarjeta-rapida strong {
+            color: var(--verde-profundo);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* ==================== PLANTA INTERACTIVA ==================== */
+        .simulador-planta {
+            background: linear-gradient(to bottom, rgba(64, 224, 208, 0.05), rgba(139, 111, 71, 0.1));
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+            margin-bottom: 50px;
+        }
+
+        .simulador-planta h2 {
+            color: var(--verde-profundo);
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .planta-svg {
+            max-width: 400px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 10px 20px rgba(27, 67, 50, 0.1));
+        }
+
+        svg {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .parte-planta {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .raiz {
+            fill: var(--tierra);
+            stroke: var(--tierra);
+            transition: all 0.3s ease;
+        }
+
+        .parte-planta:hover .raiz {
+            fill: #a0854a;
+            stroke: #a0854a;
+        }
+
+        .tallo {
+            fill: var(--verde-esmeralda);
+            transition: all 0.3s ease;
+        }
+
+        .parte-planta:hover .tallo {
+            fill: var(--verde-lima);
+        }
+
+        .hoja {
+            fill: var(--verde-lima);
+            transition: all 0.3s ease;
+            animation: balanceo 3s ease-in-out infinite;
+            transform-origin: 150px 150px;
+        }
+
+        .parte-planta:hover .hoja {
+            fill: #72efb4;
+        }
+
+        @keyframes balanceo {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        /* Tarjeta informativa integrada */
+        .info-panel-fijo {
+            background: white;
+            border: 2px solid var(--verde-esmeralda);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            margin: 20px auto 0;
+            box-shadow: 0 10px 25px var(--sombra-suave);
+            transition: all 0.3s ease;
+        }
+
+        .info-panel-fijo h3 {
+            color: var(--verde-profundo);
+            margin-bottom: 10px;
+        }
+
+        /* ==================== ANATOMÍA MICROSCÓPICA (ESTOMAS) ==================== */
+        .estoma-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(45, 106, 79, 0.1);
+            text-align: center;
+        }
+
+        .estoma-section h2 {
+            color: var(--verde-profundo);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .estoma-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 30px 0;
+        }
+
+        .visor-microscopio {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: #242424;
+            border: 8px solid var(--verde-profundo);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 10px 20px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lente-iluminado {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(82, 183, 136, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .estoma-celulas {
+            display: flex;
+            gap: 4px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .celula-oclusiva {
+            width: 60px;
+            height: 140px;
+            background: linear-gradient(to right, #74c69d, #52b788);
+            border: 3px solid var(--verde-profundo);
+            border-radius: 50% / 30% 30% 70% 70%;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.15);
+        }
+
+        .celula-oclusiva.izquierda {
+            border-radius: 40px 10px 10px 40px / 70px 30px 30px 70px;
+            transform-origin: right center;
+        }
+
+        .celula-oclusiva.derecha {
+            border-radius: 10px 40px 40px 10px / 30px 70px 70px 30px;
+            transform-origin: left center;
+        }
+
+        .visor-microscopio.abierto .celula-oclusiva.izquierda {
+            transform: scaleX(0.8) rotate(-12deg);
+            border-radius: 50px 5px 5px 50px / 70px 20px 20px 70px;
+        }
+
+        .visor-microscopio.abierto .celula-oclusiva.derecha {
+            transform: scaleX(0.8) rotate(12deg);
+            border-radius: 5px 50px 50px 5px / 20px 70px 70px 20px;
+        }
+
+        .visor-microscopio.abierto .estoma-celulas {
+            gap: 35px;
+        }
+
+        .ostiolo-orificio {
+            position: absolute;
+            width: 0px;
+            height: 90px;
+            background: #111;
+            border-radius: 50%;
+            transition: all 0.5s ease-in-out;
+            z-index: 1;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+        }
+
+        .visor-microscopio.abierto .ostiolo-orificio {
+            width: 30px;
+        }
+
+        .explicacion-estoma {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--verde-esmeralda);
+        }
+
+        /* ==================== SIMULADOR DE FOTOSÍNTESIS ==================== */
+        .laboratorio-fotosintesis {
+            background: linear-gradient(135deg, rgba(82, 183, 136, 0.08), rgba(255, 214, 10, 0.05));
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(45, 106, 79, 0.2);
+        }
+
+        .laboratorio-fotosintesis h2 {
+            color: var(--verde-profundo);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .pantalla-simulador {
+            background: linear-gradient(to bottom, #a3c2f0 0%, #eef4fc 70%, #dcd1c4 100%);
+            border: 3px solid var(--verde-profundo);
+            border-radius: 15px;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.1), 0 10px 25px rgba(0,0,0,0.1);
+            transition: background 0.5s ease;
+        }
+
+        .sim-sol {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--amarillo-solar);
+            border-radius: 50%;
+            box-shadow: 0 0 30px var(--amarillo-solar);
+            transition: all 0.5s ease;
+        }
+
+        .sim-planta-silueta {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 140px;
+            background: var(--verde-esmeralda);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+
+        .sim-planta-silueta::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 42px;
+            width: 16px;
+            height: 50px;
+            background: var(--tierra);
+        }
+
+        .burbuja-oxigeno {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(64, 224, 208, 0.5);
+            border-radius: 50%;
+            bottom: 120px;
+            animation: subirBurbuja 3s infinite linear;
+        }
+
+        @keyframes subirBurbuja {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+        }
+
+        .controles-simulacion {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .control-grupo {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .control-grupo label {
+            display: block;
+            color: var(--verde-profundo);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            background: var(--gris-laboratorio);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--verde-esmeralda);
+            cursor: pointer;
+        }
+
+        .marcador-produccion {
+            background: var(--verde-profundo);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.2rem;
+        }
+
+        .marcador-produccion span {
+            color: var(--amarillo-solar);
+            font-weight: bold;
+        }
+
+        /* ==================== SECCIÓN DE VIDEO CON BOTÓN ACELERADOR ==================== */
+        .seccion-video {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 50px;
+            border: 2px solid rgba(45, 106, 79, 0.15);
+            box-shadow: 0 10px 25px var(--sombra-suave);
+            text-align: center;
+        }
+
+        .seccion-video h2 {
+            color: var(--verde-profundo);
+            margin-bottom: 12px;
+            font-size: 2rem;
+        }
+
+        .seccion-video p {
+            color: var(--texto-principal);
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto 25px;
+            line-height: 1.5;
+        }
+
+        /* ==================== CUESTIONARIO / QUIZ ==================== */
+        .quiz-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px var(--sombra-suave);
+            border: 2px solid rgba(45, 106, 79, 0.1);
+        }
+
+        .quiz-section h2 {
+            color: var(--verde-profundo);
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .contador-quiz {
+            text-align: center;
+            color: var(--verde-esmeralda);
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .pregunta-container {
+            background: var(--blanco-brillante);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(45, 106, 79, 0.1);
+        }
+
+        .pregunta-texto {
+            color: var(--verde-profundo);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .opciones {
+            display: grid;
+            gap: 12px;
+        }
+
+        .opcion {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            text-align: left;
+        }
+
+        .opcion:hover {
+            border-color: var(--verde-lima);
+            background: rgba(82, 183, 136, 0.05);
+        }
+
+        .opcion.correcta {
+            background: #d8f3dc;
+            border-color: var(--verde-esmeralda);
+            color: var(--verde-profundo);
+            font-weight: 600;
+        }
+
+        .opcion.incorrecta {
+            background: #ffe3e3;
+            border-color: #c92a2a;
+            color: #c92a2a;
+        }
+
+        .retroalimentacion {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .retroalimentacion.visible {
+            display: block;
+        }
+
+        .retroalimentacion.correcta { background: #d8f3dc; color: var(--verde-profundo); }
+        .retroalimentacion.incorrecta { background: #ffe3e3; color: #c92a2a; }
+
+        .resultados-finales {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #e8f5e9;
+            border-radius: 15px;
+        }
+
+        /* ==================== CRÉDITOS Y HERRAMIENTA DIDÁCTICA ==================== */
+        .creditos-seccion {
+            background: linear-gradient(135deg, var(--verde-profundo), #0f241b);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .creditos-seccion h3 {
+            margin-bottom: 15px;
+            color: var(--cian-energia);
+        }
+
+        .creditos-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid var(--verde-lima);
+            border-radius: 25px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-align: center;
+            outline: none;
+        }
+
+        .tarjeta-certificado {
+            display: none;
+            background: white;
+            color: var(--texto-principal);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 20px auto 0;
+            border: 4px double var(--verde-esmeralda);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .tarjeta-certificado h4 {
+            color: var(--verde-profundo);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .portada h1 { font-size: 2.2rem; }
+            .contenedor { padding: 10px; }
+            .controles-simulacion { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fondo-animado" id="fondoAnimado"></div>
+
+    <div class="contenedor">
+        
+        <section class="portada">
+            <h1>🌿 BioLab Plantas 🌱</h1>
+            <p class="subtitulo">Viaje interactivo al motor verde de la Tierra 🌻</p>
+            <p class="descripcion">
+                Descubre cómo las plantas transforman la luz del Sol en alimento, purifican el aire que respiramos y sostienen la vida en nuestro planeta a través de un laboratorio virtual interactivo.
+            </p>
+            <button class="boton-principal" onclick="irA('simuladorPlanta')">
+                ▶ Iniciar exploración botánica
+            </button>
+            
+            <div class="tarjetas-rapidas">
+                <div class="tarjeta-rapida">
+                    <strong>🌱 Productores Primarios</strong>
+                    <p>Base de todos los ecosistemas terrestres</p>
+                </div>
+                <div class="tarjeta-rapida">
+                    <strong>💨 Fábricas de O₂</strong>
+                    <p>Producen el oxígeno que respiramos</p>
+                </div>
+                <div class="tarjeta-rapida">
+                    <strong>🌍 Reguladores Climáticos</strong>
+                    <p>Absorben CO₂ y controlan la temperatura</p>
+                </div>
+                <div class="tarjeta-rapida">
+                    <strong>🍽️ Base Alimenticia</strong>
+                    <p>Sostienen toda la cadena alimenticia</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="simulador-planta" id="simuladorPlanta">
+            <h2>🔬 Explorador de Anatomía Vegetal 🌿</h2>
+            <p style="margin-bottom: 30px;">
+                <em>Haz clic o toca las diferentes partes de la planta para conocer sus funciones vitales 🌸</em>
+            </p>
+            
+            <svg class="planta-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                <g class="parte-planta" onclick="actualizarInfoAnatomia('raiz')">
+                    <path class="raiz" d="M 150 250 Q 110 310 90 380 M 150 250 Q 150 320 145 390 M 150 250 Q 190 310 210 380" stroke-width="6" fill="none" stroke-linecap="round"/>
+                    <path class="raiz" d="M 120 300 Q 100 330 75 350 M 170 310 Q 200 340 225 360" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    <ellipse cx="150" cy="245" rx="20" ry="8" fill="var(--tierra)"/>
+                </g>
+
+                <g class="parte-planta" onclick="actualizarInfoAnatomia('tallo')">
+                    <rect class="tallo" x="142" y="90" width="16" height="155" rx="5"/>
+                </g>
+
+                <g class="parte-planta" onclick="actualizarInfoAnatomia('hoja')">
+                    <path class="hoja" d="M 145 190 Q 80 160 70 200 Q 110 220 145 190 Z" />
+                    <path class="hoja" d="M 155 170 Q 220 140 230 180 Q 190 200 155 170 Z" />
+                    <path class="hoja" d="M 145 130 Q 90 90 80 130 Q 110 150 145 130 Z" />
+                    <path class="hoja" d="M 155 110 Q 210 70 220 110 Q 190 130 155 110 Z" />
+                </g>
+            </svg>
+
+            <div class="info-panel-fijo" id="infoPanelAnatomia">
+                <h3>Selecciona un órgano vegetal 🌿</h3>
+                <p>Haz clic sobre las raíces, el tallo o las hojas para examinar su estructura y propósitos biológicos en nuestro laboratorio.</p>
+            </div>
+        </section>
+
+        <section class="estoma-section">
+            <h2>🍃 Zoom al Microscopio: Los Estomas 🔬</h2>
+            <p>Las hojas cuentan con pequeños poros llamados **estomas**, encargados del intercambio de gases (respiración y fotosíntesis) y la transpiración del agua.</p>
+            
+            <div class="estoma-container">
+                <div class="visor-microscopio" id="microscopio">
+                    <div class="lente-iluminado"></div>
+                    <div class="ostiolo-orificio"></div>
+                    <div class="estoma-celulas">
+                        <div class="celula-oclusiva izquierda"></div>
+                        <div class="celula-oclusiva derecha"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="boton-principal" onclick="alternarEstoma()" id="btnEstoma">
+                Abrir Estomas
+            </button>
+
+            <div class="explicacion-estoma" id="infoEstoma">
+                <strong>Estado: Cerrado 🔒</strong><p>El estoma se cierra para evitar que la planta pierda agua por evaporación en ambientes secos o durante la noche.</p>
+            </div>
+        </section>
+
+        <section class="laboratorio-fotosintesis">
+            <h2>🧪 Simulador de Tasas de Fotosíntesis ☀️</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Ajusta las variables ambientales para observar cómo se altera la velocidad de producción de oxígeno (O<sub>2</sub>) y glucosa 🌱.</p>
+            
+            <div class="pantalla-simulador" id="pantallaSim">
+                <div class="sim-sol" id="solSim"></div>
+                <div class="sim-planta-silueta"></div>
+                <div id="contenedorBurbujas"></div>
+            </div>
+
+            <div class="controles-simulacion">
+                <div class="control-grupo">
+                    <label>☀️ Intensidad Lumínica</label>
+                    <input type="range" class="slider" id="slLuz" min="0" max="100" value="50" oninput="simularLaboratorio()">
+                    <p style="margin-top:5px;">Valor: <span id="valLuz">50</span>%</p>
+                </div>
+                <div class="control-grupo">
+                    <label>💧 Disponibilidad de Agua</label>
+                    <input type="range" class="slider" id="slAgua" min="0" max="100" value="50" oninput="simularLaboratorio()">
+                    <p style="margin-top:5px;">Valor: <span id="valAgua">50</span>%</p>
+                </div>
+            </div>
+
+            <div class="marcador-produccion">
+                📈 Rendimiento Fotosintético: <span id="rendimientoRpm">0</span> burbujas de O<sub>2</sub> por minuto
+            </div>
+        </section>
+
+        <section class="seccion-video">
+            <h2>📺 Cine Botánico: El Reino Vegetal 🌻</h2>
+            <p>Antes de comenzar el desafío final, te invitamos a ver un video explicativo sobre el ciclo vital y la importancia de las plantas en la Tierra.</p>
+            <a href="https://youtu.be/6oMJRzQ02c0" target="_blank" class="boton-principal boton-youtube">
+                ▶ Ver video educativo en YouTube
+            </a>
+        </section>
+
+        <section class="quiz-section">
+            <h2>📝 Desafío de Conocimientos 🧠</h2>
+            <div class="contador-quiz" id="progresoQuiz">Pregunta 1 de 3</div>
+
+            <div id="juegoQuiz">
+                <div class="pregunta-container">
+                    <p class="pregunta-texto" id="txtPregunta">Cargando pregunta...</p>
+                    <div class="opciones" id="bloqueOpciones"></div>
+                    <div class="retroalimentacion" id="txtRetro"></div>
+                </div>
+                <div style="text-align: center;">
+                    <button class="boton-principal" id="btnSiguiente" onclick="siguientePregunta()" disabled>Siguiente pregunta</button>
+                </div>
+            </div>
+
+            <div class="resultados-finales" id="bloqueResultados">
+                <h3>¡Evaluación Completada! 🏆</h3>
+                <p style="font-size: 1.5rem; margin-bottom: 15px;">Tu nota: <strong><span id="puntosFinales">0</span> / 3</strong></p>
+                <p id="mensajeEvaluacion"></p>
+                <button class="boton-principal" onclick="reiniciarQuiz()">Intentar de nuevo</button>
+            </div>
+        </section>
+
+        <section class="creditos-seccion">
+            <h3>🎓 Registro de Investigador Botánico 🍃</h3>
+            <p style="margin-bottom: 15px;">Introduce tu nombre para expedir tu credencial del laboratorio virtual:</p>
+            <input type="text" class="creditos-input" id="nombreEstudiante" placeholder="Escribe tu nombre completo aquí" oninput="generarCertificado()">
+            
+            <div class="tarjeta-certificado" id="certificado">
+                <h4>Credencial BioLab Certificada 📜</h4>
+                <p style="margin: 15px 0;">El/La estudiante:</p>
+                <h5 style="font-size: 1.4rem; color: var(--verde-esmeralda); font-style: italic;" id="nombreCert">Explorador</h5>
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #555;">Ha completado con éxito la estación experimental interactiva del Motor Verde del Planeta.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        window.onload = function() {
+            crearParticulas();
+            simularLaboratorio();
+            cargarPregunta();
+        };
+
+        function crearParticulas() {
+            const fondo = document.getElementById('fondoAnimado');
+            const cantidad = 15;
+            for(let i = 0; i < cantidad; i++) {
+                let p = document.createElement('div');
+                p.classList.add('particula');
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                p.style.animationDelay = Math.random() * 5 + 's';
+                fondo.appendChild(p);
+            }
+        }
+
+        function irA(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const datosAnatomia = {
+            raiz: {
+                titulo: "🌱 El Sistema Radicular (Raíces)",
+                desc: "Anclan la planta firmemente al sustrato terrestre. Su función clave es absorber agua y sales minerales esenciales del suelo, formando la savia bruta que ascenderá por el tallo."
+            },
+            tallo: {
+                titulo: "🪵 El Tallo (Eje de Conducción)",
+                desc: "Sostiene los órganos aéreos como hojas y flores. En su interior se localizan los vasos conductores: el xilema (que transporta agua desde las raíces) y el floema (que distribuye los nutrientes elaborados)."
+            },
+            hoja: {
+                titulo: "🍃 Las Hojas (Paneles Solares)",
+                desc: "Órganos especializados en capturar la energía lumínica. Contienen cloroplastos repletos de clorofila, el pigmento responsable de realizar la fotosíntesis y sintetizar la glucosa."
+            }
+        };
+
+        function actualizarInfoAnatomia(parte) {
+            const panel = document.getElementById('infoPanelAnatomia');
+            panel.innerHTML = `<h3>${datosAnatomia[parte].titulo}</h3><p>${datosAnatomia[parte].desc}</p>`;
+            panel.style.borderColor = "var(--cian-energia)";
+        }
+
+        let estomaAbierto = false;
+        function alternarEstoma() {
+            const mic = document.getElementById('microscopio');
+            const btn = document.getElementById('btnEstoma');
+            const info = document.getElementById('infoEstoma');
+            
+            estomaAbierto = !estomaAbierto;
+            
+            if(estomaAbierto) {
+                mic.classList.add('abierto');
+                btn.textContent = "Cerrar Estomas";
+                btn.style.background = "var(--cian-energia)";
+                btn.style.color = "var(--verde-profundo)";
+                info.innerHTML = "<strong>Estado: Abierto 🔓</strong><p>Permite la entrada de dióxido de carbono (CO<sub>2</sub>) imprescindible para la fotosíntesis y libera oxígeno (O<sub>2</sub>) y vapor de agua al medio ambiente.</p>";
+            } else {
+                mic.classList.remove('abierto');
+                btn.textContent = "Abrir Estomas";
+                btn.style.background = "var(--verde-esmeralda)";
+                btn.style.color = "white";
+                info.innerHTML = "<strong>Estado: Cerrado 🔒</strong><p>El estoma se cierra para evitar que la planta pierda agua por evaporación en ambientes secos o durante la noche.</p>";
+            }
+        }
+
+        let intervaloBurbujas;
+        function simularLaboratorio() {
+            const luz = parseInt(document.getElementById('slLuz').value);
+            const agua = parseInt(document.getElementById('slAgua').value);
+            
+            document.getElementById('valLuz').textContent = luz;
+            document.getElementById('valAgua').textContent = agua;
+            
+            const pantalla = document.getElementById('pantallaSim');
+            const sol = document.getElementById('solSim');
+            pantalla.style.filter = `brightness(${0.5 + (luz/100) * 0.7})`;
+            sol.style.transform = `scale(${0.6 + (luz/100) * 0.6})`;
+            
+            let rendimiento = Math.round((luz * agua) / 100 * 1.2);
+            document.getElementById('rendimientoRpm').textContent = rendimiento;
+            
+            clearInterval(intervaloBurbujas);
+            const contenedor = document.getElementById('contenedorBurbujas');
+            contenedor.innerHTML = "";
+            
+            if(rendimiento > 5) {
+                let intervaloMs = Math.max(150, 2000 - (rendimiento * 15));
+                intervaloBurbujas = setInterval(() => {
+                    let b = document.createElement('div');
+                    b.classList.add('burbuja-oxigeno');
+                    let tam = Math.random() * 8 + 6;
+                    b.style.width = tam + 'px';
+                    b.style.height = tam + 'px';
+                    b.style.left = (Math.random() * 60 + 20) + '%';
+                    contenedor.appendChild(b);
+                    
+                    setTimeout(() => b.remove(), 3000);
+                }, intervaloMs);
+            }
+        }
+
+        const preguntas = [
+            {
+                q: "¿Qué estructura foliar se encarga del intercambio gaseoso y la transpiración de agua?",
+                options: ["Los cloroplastos", "Los estomas", "Los vasos del floema", "Las raíces secundarias"],
+                correct: 1,
+                retro: "¡Correcto! Los estomas regulan la entrada de CO<sub>2</sub> y salida de O<sub>2</sub> y vapor de agua."
+            },
+            {
+                q: "Si un ecosistema sufre una sequía extrema, ¿cómo reaccionarán los estomas de las plantas?",
+                options: ["Se abrirán más para capturar aire", "Permanecerán cerrados para conservar el agua", "Se transformarán en raíces", "Producirán el doble de clorofila"],
+                correct: 1,
+                retro: "¡Excelente! Al cerrarse, evitan la pérdida de fluidos vitales por deshidratación foliar."
+            },
+            {
+                q: "¿Cuáles son los insumos o variables principales que simula nuestro laboratorio para activar la fotosíntesis?",
+                options: ["Oxígeno y Glucosa", "Sustrato orgánico y Viento", "Luz solar y disponibilidad de Agua", "Temperatura basal y Floema"],
+                correct: 2,
+                retro: "¡Así es! Sin energía luminosa y agua líquida, los cloroplastos no pueden romper moléculas para sintetizar azúcares."
+            }
+        ];
+
+        let indicePregunta = 0;
+        let puntaje = 0;
+
+        function cargarPregunta() {
+            const btnSiguiente = document.getElementById('btnSiguiente');
+            const txtRetro = document.getElementById('txtRetro');
+            
+            btnSiguiente.disabled = true;
+            txtRetro.classList.remove('visible', 'correcta', 'incorrecta');
+            
+            document.getElementById('progresoQuiz').textContent = `Pregunta ${indicePregunta + 1} de ${preguntas.length}`;
+            
+            const pActual = preguntas[indicePregunta];
+            document.getElementById('txtPregunta').innerHTML = pActual.q;
+            
+            const bloqueOpciones = document.getElementById('bloqueOpciones');
+            bloqueOpciones.innerHTML = "";
+            
+            pActual.options.forEach((opcion, i) => {
+                let btn = document.createElement('button');
+                btn.classList.add('opcion');
+                btn.innerHTML = opcion;
+                btn.onclick = () => verificarRespuesta(i);
+                bloqueOpciones.appendChild(btn);
+            });
+        }
+
+        function verificarRespuesta(indiceSeleccionado) {
+            const pActual = preguntas[indicePregunta];
+            const opcionesBotones = document.getElementById('bloqueOpciones').children;
+            const txtRetro = document.getElementById('txtRetro');
+            const btnSiguiente = document.getElementById('btnSiguiente');
+            
+            for(let b of opcionesBotones) {
+                b.disabled = true;
+            }
+            
+            if(indiceSeleccionado === pActual.correct) {
+                opcionesBotones[indiceSeleccionado].classList.add('correcta');
+                txtRetro.innerHTML = pActual.retro;
+                txtRetro.classList.add('visible', 'correcta');
+                puntaje++;
+            } else {
+                opcionesBotones[indiceSeleccionado].classList.add('incorrecta');
+                opcionesBotones[pActual.correct].classList.add('correcta');
+                txtRetro.innerHTML = `Incorrecto. La respuesta adecuada era: ${pActual.options[pActual.correct]}`;
+                txtRetro.classList.add('visible', 'incorrecta');
+            }
+            
+            btnSiguiente.disabled = false;
+        }
+
+        function siguientePregunta() {
+            indicePregunta++;
+            if(indicePregunta < preguntas.length) {
+                cargarPregunta();
+            } else {
+                mostrarResultadosFinales();
+            }
+        }
+
+        function mostrarResultadosFinales() {
+            document.getElementById('juegoQuiz').style.display = 'none';
+            const bloqueRes = document.getElementById('bloqueResultados');
+            bloqueRes.style.display = 'block';
+            
+            document.getElementById('puntosFinales').textContent = puntaje;
+            
+            const mensaje = document.getElementById('mensajeEvaluacion');
+            if(puntaje === preguntas.length) {
+                mensaje.textContent = "¡Perfecto! Eres un experto botánico listo para dirigir tu propio laboratorio forestal.";
+            } else if(puntaje >= 1) {
+                mensaje.textContent = "¡Buen trabajo! Has comprendido los fundamentos del metabolismo vegetal.";
+            } else {
+                mensaje.textContent = "Te recomendamos revisar los paneles interactivos de anatomía y reajustar los niveles del simulador antes de volver a intentarlo.";
+            }
+        }
+
+        function reiniciarQuiz() {
+            indicePregunta = 0;
+            puntaje = 0;
+            document.getElementById('juegoQuiz').style.display = 'block';
+            document.getElementById('bloqueResultados').style.display = 'none';
+            cargarPregunta();
+        }
+
+        function generarCertificado() {
+            const input = document.getElementById('nombreEstudiante');
+            const cajaCert = document.getElementById('certificado');
+            const txtNombre = document.getElementById('nombreCert');
+            
+            if(input.value.trim().length > 2) {
+                cajaCert.style.display = 'block';
+                txtNombre.textContent = input.value;
+            } else {
+                cajaCert.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
